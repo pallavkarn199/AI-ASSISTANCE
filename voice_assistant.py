@@ -9,12 +9,15 @@ import os
 import sys
 
 # ---------------- CONFIG ----------------
-API_KEY = "AIzaSyD46wVLyQmgyDRDp60gY1sbXBi0eBDhyEM"  # set this in your environment
-if not API_KEY:
+# Load the Gemini API Key from the private file
+with open("gemini_key", "r") as key_file:
+    GEMINI_API_KEY = key_file.read().strip()
+
+if not GEMINI_API_KEY:
     print("ERROR: GEMINI_API_KEY not set.")
     sys.exit(1)
 
-genai.configure(api_key=API_KEY)
+genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 engine = pyttsx3.init()
